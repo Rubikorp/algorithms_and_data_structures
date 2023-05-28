@@ -2,6 +2,7 @@
 public class MyLinkedList {
 
     private Node head;
+    private Node tail;
 
     /**
      * Реализоват в классе MyLinkedList следующие методы
@@ -16,15 +17,49 @@ public class MyLinkedList {
     private class Node {
         int value;
         Node next;
+        Node previous;
 
         public Node(int value) {
             this.value = value;
         }
 
-        public Node(int value, Node next) {
+        public Node(int value, Node next, Node previous) {
             this.value = value;
             this.next = next;
+            this.previous = previous;
         }
+    }
+
+    public int size() {
+        int size = 0;
+        Node currentNode = head;
+        while (currentNode != null) {
+            size++;
+            Node next = currentNode.next;
+            currentNode = next;
+        }
+        return size;
+    }
+
+    public boolean contains(int value) {
+        boolean findElement = false;
+        Node node = head;
+        while (node.next != null) {
+            node = node.next;
+            if (node.value == value){
+                return findElement = true;
+            }
+        }
+        return findElement;
+    }
+
+    public int popLast() {
+		if (tail != null) {
+			tail = null;
+		} else {
+            throw new Error("Список пустой", null)
+        }
+		return 1;
     }
 
     public void add(int value) {
